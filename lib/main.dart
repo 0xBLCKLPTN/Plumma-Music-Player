@@ -36,7 +36,7 @@ class _PlummaHomePageState extends State<PlummaHomePage> with SingleTickerProvid
     // Create an animation controller 
     _controller = AnimationController( 
       vsync: this, // vsync is set to this for performance reasons 
-      duration: Duration(seconds: 6 ), // Set the duration of the animation 
+      duration: Duration(seconds: 6), // Set the duration of the animation 
     ); 
   
     // Create a Tween for the rotation angle 
@@ -77,30 +77,37 @@ class _PlummaHomePageState extends State<PlummaHomePage> with SingleTickerProvid
             ),
             Row(
               children: [
-                AnimatedBuilder(
-                  animation: _animation,
-                  builder: (context, child)
-                  {
-                    return Transform.rotate(
-                      angle: _animation.value,
-                      child: Image.asset(
-                        "assets/vinill.png",
-                        scale: 3,
-                        fit: BoxFit.cover,
-                      )
-                    );
-                  }
-                ),
-                
-                Row(
+                Stack(
+                  textDirection: TextDirection.ltr,
                   children: [
-                    Text("VELIAL SQUAD", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
-                    Text(" - Poison", style: TextStyle(fontSize: 24, fontWeight: FontWeight.normal, color: Colors.white)),
+                    Container(
+                      padding: EdgeInsets.only(top:40, bottom: 10, left: 350, right: 20),
+                      child: AnimatedBuilder(
+                          animation: _animation,
+                          builder: (context, child)
+                          {
+                            return Transform.rotate(
+                              angle: _animation.value,
+                              child: Image.asset("assets/vinill.png", width: 600, height: 600)
+                            );
+                          }
+                      )
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(top:40, bottom: 10, left: 40, right: 20),
+                      child: Image.network('https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/ec/2e/0c/ec2e0c1f-382e-a6e0-b098-c95c81479afa/cover.jpg/600x600bf-60.jpg'),
+                    ),
+
+                    
                   ],
-                )
-                
+                ),
+                Container(
+                      padding: EdgeInsets.only(top:600, bottom: 10, left: 370, right: 20),
+                      child: Text("VELIAL SQUAD", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
+                    )
               ],
-            ),
+
+            )
         ],
           
         ),
